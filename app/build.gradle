@@ -1,14 +1,29 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    productFlavors {
+        dev {
+            minSdkVersion rootProject.ext.devMinSdkVersion
+        }
+        prod {
+            minSdkVersion rootProject.ext.minSdkVersion
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+
     defaultConfig {
         applicationId "iammert.com.instagramtags"
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -17,6 +32,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE'
+    }
 }
 
 dependencies {
@@ -24,6 +55,40 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.1.0'
+
     testCompile 'junit:junit:4.12'
+
+    //dagger
+    apt rootProject.ext.daggerCompiler
+    compile rootProject.ext.daggerGlassfish
+    compile rootProject.ext.dagger
+
+    //support lib
+    compile rootProject.ext.supportLibAppCompat
+    compile rootProject.ext.supportLibDesign
+    compile rootProject.ext.supportLibCardView
+
+    //rxjava
+    compile rootProject.ext.rxjava
+    compile rootProject.ext.retrofitRxAdapter
+
+    //Butterknife
+    compile rootProject.ext.butterKnife
+
+    //rxAndroid & rxBinding
+    compile rootProject.ext.rxAndroid
+    compile rootProject.ext.rxBinding
+
+    //retrofit
+    compile rootProject.ext.retrofit
+    compile rootProject.ext.gsonConverter
+    compile rootProject.ext.retrofitLogging
+
+    //ui
+    compile rootProject.ext.picasso
+    compile rootProject.ext.materialDialog
+
+    //Parceler
+    compile rootProject.ext.parcelerApi
+    apt rootProject.ext.parceler
 }
