@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">InstagramTags</string>
+    <string name="app_name">Instagram Tags</string>
+
+    <string name="login">Giriş yap</string>
 </resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="iammert.com.instagramtags.viewmodel.splash.SplashViewModel"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_margin="@dimen/margin_32"
+            android:backgroundTint="@color/colorWhite"
+            android:layout_alignParentBottom="true"
+            android:onClick="@{viewModel.onLoginClicked}"
+            android:textColor="@color/colorGrayDark"
+            android:text="@string/login"/>
+
+    </RelativeLayout>
+
+</layout>

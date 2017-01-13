@@ -1,5 +1,7 @@
 package iammert.com.instagramtags.di.app;
 
+import android.content.SharedPreferences;
+
 import com.google.gson.Gson;
 
 import javax.inject.Singleton;
@@ -16,6 +18,7 @@ import iammert.com.instagramtags.util.RxBus;
 @Component(modules = {AppModule.class, NetworkModule.class})
 public interface AppComponent {
     ApiSource apiSource();
+    SharedPreferences sharedPreferences();
     Gson gson();
     RxBus bus();
 }
