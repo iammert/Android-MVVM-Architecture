@@ -38,6 +38,8 @@ captures/
 .idea/tasks.xml
 .idea/gradle.xml
 .idea/libraries
+.idea/
+.idea
 
 # Keystore files
 *.jks
