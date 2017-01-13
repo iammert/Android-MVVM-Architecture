@@ -3,6 +3,18 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="margin_8">8dp</dimen>
     <dimen name="margin_16">16dp</dimen>
+    <dimen name="margin_24">24dp</dimen>
     <dimen name="margin_32">32dp</dimen>
+
+    <dimen name="dimen_56">56dp</dimen>
+    <dimen name="dimen_2">2dp</dimen>
+    <dimen name="dimen_4">4dp</dimen>
+
+
+    <dimen name="text_size_small">13sp</dimen>
+    <dimen name="text_size_medium">15sp</dimen>
+    <dimen name="text_size_large">17sp</dimen>
+    <dimen name="text_size_xlarge">19sp</dimen>
 </resources>

@@ -1,5 +1,6 @@
 package iammert.com.instagramtags.view.searchtag;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,11 +8,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
+
+import iammert.com.instagramtags.InstagramTagsApp;
+import iammert.com.instagramtags.R;
+import iammert.com.instagramtags.databinding.FragmentSearchTagBinding;
+import iammert.com.instagramtags.di.searchtag.DaggerSearchTagComponent;
+import iammert.com.instagramtags.di.searchtag.SearchTagModule;
+import iammert.com.instagramtags.model.api.entity.TagSearchResponse;
+import iammert.com.instagramtags.viewmodel.searchtag.SearchTagViewModel;
+
 /**
  * Created by mertsimsek on 13/01/17.
  */
 
-public class SearchTagFragment extends Fragment{
+public class SearchTagFragment extends Fragment implements SearchTagViewModel.SearchTagListener{
+
+    FragmentSearchTagBinding binding;
+
+    @Inject
+    SearchTagViewModel viewModel;
+
+    @Inject
+    SearchTagAdapter adapter;
 
     public static SearchTagFragment newInstance() {
         Bundle args = new Bundle();
@@ -23,6 +42,22 @@ public class SearchTagFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_tag, container, false);
+        initializeInjectors();
+        binding.setViewModel(viewModel);
+        binding.recyclerView.setAdapter(adapter);
+        return binding.getRoot();
+    }
+
+    private void initializeInjectors(){
+        DaggerSearchTagComponent.builder()
+                .appComponent(((InstagramTagsApp)getActivity().getApplication()).getAppComponent())
+                .searchTagModule(new SearchTagModule(this))
+                .build().inject(this);
+    }
+
+    @Override
+    public void onTagListLoaded(TagSearchResponse response) {
+        adapter.setTags(response.data);
     }
 }

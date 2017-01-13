@@ -2,4 +2,9 @@
     <string name="app_name">Instagram Tags</string>
 
     <string name="login">Giriş yap</string>
+
+    <string name="hint_search_tag">Search tag (eg. snowy)</string>
+
+    <string name="tag">#%1$s</string>
+    <string name="post_count">%1$s post</string>
 </resources>

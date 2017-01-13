@@ -1,6 +1,8 @@
 package iammert.com.instagramtags.model.api;
 
+import iammert.com.instagramtags.model.api.entity.TagSearchResponse;
 import retrofit2.Retrofit;
+import rx.Observable;
 
 /**
  * Created by mertsimsek on 13/01/17.
@@ -12,5 +14,10 @@ public class ApiSourceImpl implements ApiSource{
 
     public ApiSourceImpl(Retrofit retrofit) {
         retrofitInterface = retrofit.create(RetrofitInterface.class);
+    }
+
+    @Override
+    public Observable<TagSearchResponse> searchTag(String query, String token) {
+        return retrofitInterface.searchTag(query, token);
     }
 }
