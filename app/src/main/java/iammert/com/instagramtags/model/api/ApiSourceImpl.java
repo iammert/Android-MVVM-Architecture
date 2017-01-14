@@ -1,5 +1,6 @@
 package iammert.com.instagramtags.model.api;
 
+import iammert.com.instagramtags.model.api.entity.MediaListResponse;
 import iammert.com.instagramtags.model.api.entity.TagSearchResponse;
 import retrofit2.Retrofit;
 import rx.Observable;
@@ -19,5 +20,10 @@ public class ApiSourceImpl implements ApiSource{
     @Override
     public Observable<TagSearchResponse> searchTag(String query, String token) {
         return retrofitInterface.searchTag(query, token);
+    }
+
+    @Override
+    public Observable<MediaListResponse> searchMedia(String tag, String token) {
+        return retrofitInterface.searchMediaWithTag(tag, token);
     }
 }

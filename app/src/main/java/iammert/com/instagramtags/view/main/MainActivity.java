@@ -13,6 +13,8 @@ import iammert.com.instagramtags.R;
 import iammert.com.instagramtags.databinding.ActivityMainBinding;
 import iammert.com.instagramtags.di.main.DaggerMainComponent;
 import iammert.com.instagramtags.di.main.MainModule;
+import iammert.com.instagramtags.model.api.entity.Tag;
+import iammert.com.instagramtags.view.medialist.MediaListActivity;
 import iammert.com.instagramtags.view.searchtag.SearchTagFragment;
 import iammert.com.instagramtags.viewmodel.main.MainViewModel;
 
@@ -54,5 +56,14 @@ public class MainActivity extends AppCompatActivity implements MainViewModel.Mai
                 .appComponent(((InstagramTagsApp) getApplication()).getAppComponent())
                 .mainModule(new MainModule(this))
                 .build().inject(this);
+    }
+
+    @Override
+    public void onTagItemClicked(Tag tag) {
+        if(!viewModel.isTwoPane())
+            startActivity(MediaListActivity.newIntent(this, tag));
+        else{
+            // TODO: 14/01/17 load fragment to containerDetail
+        }
     }
 }

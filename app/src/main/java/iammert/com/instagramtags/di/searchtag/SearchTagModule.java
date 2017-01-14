@@ -12,6 +12,7 @@ import iammert.com.instagramtags.domain.searchtag.SearchTagUsecaseImpl;
 import iammert.com.instagramtags.model.api.ApiSource;
 import iammert.com.instagramtags.model.preferences.PreferencesHelper;
 import iammert.com.instagramtags.model.preferences.PreferencesHelperImpl;
+import iammert.com.instagramtags.util.RxBus;
 import iammert.com.instagramtags.view.searchtag.SearchTagAdapter;
 import iammert.com.instagramtags.viewmodel.searchtag.SearchTagViewModel;
 
@@ -47,7 +48,7 @@ public class SearchTagModule {
 
     @Provides
     @Fragment
-    SearchTagAdapter provideSearchTagAdapter(){
-        return new SearchTagAdapter();
+    SearchTagAdapter provideSearchTagAdapter(RxBus rxBus){
+        return new SearchTagAdapter(rxBus);
     }
 }

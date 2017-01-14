@@ -7,4 +7,5 @@
 
     <string name="tag">#%1$s</string>
     <string name="post_count">%1$s post</string>
+    <string name="like_count">%1$s likes</string>
 </resources>

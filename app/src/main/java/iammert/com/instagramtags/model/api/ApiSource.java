@@ -1,5 +1,6 @@
 package iammert.com.instagramtags.model.api;
 
+import iammert.com.instagramtags.model.api.entity.MediaListResponse;
 import iammert.com.instagramtags.model.api.entity.TagSearchResponse;
 import rx.Observable;
 
@@ -10,4 +11,6 @@ import rx.Observable;
 public interface ApiSource {
 
     Observable<TagSearchResponse> searchTag(String query, String token);
+
+    Observable<MediaListResponse> searchMedia(String tag, String token);
 }

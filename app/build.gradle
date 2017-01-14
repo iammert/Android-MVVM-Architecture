@@ -6,6 +6,7 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
+
     productFlavors {
         dev {
             minSdkVersion rootProject.ext.devMinSdkVersion
@@ -14,6 +15,7 @@ android {
             minSdkVersion rootProject.ext.minSdkVersion
         }
     }
+
     dataBinding {
         enabled = true
     }
@@ -87,6 +89,7 @@ dependencies {
     //ui
     compile rootProject.ext.picasso
     compile rootProject.ext.materialDialog
+    compile rootProject.ext.circleImage
 
     //Parceler
     compile rootProject.ext.parcelerApi

@@ -10,6 +10,7 @@ import java.util.List;
 
 import iammert.com.instagramtags.databinding.ItemSearchTagBinding;
 import iammert.com.instagramtags.model.api.entity.Tag;
+import iammert.com.instagramtags.util.RxBus;
 import iammert.com.instagramtags.viewmodel.searchtag.SearchTagItemViewModel;
 
 /**
@@ -18,9 +19,11 @@ import iammert.com.instagramtags.viewmodel.searchtag.SearchTagItemViewModel;
 
 public class SearchTagAdapter extends RecyclerView.Adapter<SearchTagAdapter.SearchTagViewHolder> {
 
-    List<Tag> tags;
+    private List<Tag> tags;
+    private RxBus rxBus;
 
-    public SearchTagAdapter() {
+    public SearchTagAdapter(RxBus rxBus) {
+        this.rxBus = rxBus;
         tags = new ArrayList<>();
     }
 
@@ -36,7 +39,7 @@ public class SearchTagAdapter extends RecyclerView.Adapter<SearchTagAdapter.Sear
 
     @Override
     public void onBindViewHolder(SearchTagViewHolder holder, int position) {
-        holder.bind(new SearchTagItemViewModel(holder.itemView.getContext(), tags.get(position)));
+        holder.bind(new SearchTagItemViewModel(holder.itemView.getContext(), rxBus, tags.get(position)));
     }
 
     @Override

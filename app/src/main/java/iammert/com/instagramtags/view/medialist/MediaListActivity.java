@@ -6,16 +6,22 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import org.parceler.Parcels;
+
 import iammert.com.instagramtags.R;
+import iammert.com.instagramtags.model.api.entity.Tag;
 
 /**
  * Created by mertsimsek on 13/01/17.
  */
 public class MediaListActivity extends AppCompatActivity {
 
-    public static Intent newIntent(Context context) {
+    public static final String KEY_TAG = "key_tag";
+
+    public static Intent newIntent(Context context, Tag tag) {
         Intent intent = new Intent(context, MediaListActivity.class);
         Bundle bundle = new Bundle();
+        bundle.putParcelable(KEY_TAG, Parcels.wrap(tag));
         intent.putExtras(bundle);
         return intent;
     }
@@ -27,7 +33,7 @@ public class MediaListActivity extends AppCompatActivity {
 
         if (savedInstanceState == null)
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.containerDetail, MediaListFragment.newInstance())
+                    .add(R.id.containerDetail, MediaListFragment.newInstance(Parcels.unwrap(getIntent().getExtras().getParcelable(KEY_TAG))))
                     .commitAllowingStateLoss();
     }
 }

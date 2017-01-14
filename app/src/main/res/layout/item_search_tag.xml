@@ -17,6 +17,7 @@
         android:paddingTop="@dimen/margin_16"
         android:paddingBottom="@dimen/margin_16"
         android:clickable="true"
+        android:onClick="@{viewModel.onTagClicked}"
         android:background="?attr/selectableItemBackground">
 
         <TextView
