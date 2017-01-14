@@ -11,12 +11,17 @@
     </data>
 
     <RelativeLayout
-        android:layout_width="160dp"
-        android:layout_height="160dp">
+        android:layout_width="wrap_content"
+        android:layout_height="160dp"
+        android:layout_margin="@dimen/dimen_4"
+        android:background="@color/colorWhite">
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:imageUrl="@{viewModel.image}"
+            app:placeHolder="@{@drawable/bg_image}"
+            android:scaleType="centerCrop"/>
 
 
         <LinearLayout
@@ -30,11 +35,13 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_image"
-                android:layout_width="@dimen/dimen_24"
-                android:layout_height="@dimen/dimen_24"
+                android:layout_width="@dimen/dimen_32"
+                android:layout_height="@dimen/dimen_32"
                 android:layout_margin="@dimen/margin_16"
                 app:civ_border_color="#FFFFFF"
-                app:civ_border_width="2dp" />
+                app:civ_border_width="2dp"
+                app:circleLibImageUrl="@{viewModel.userImage}"
+                app:circleLibPlaceHolder="@{@drawable/bg_image}"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,6 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.userName}"
+                    android:textStyle="bold"
                     android:singleLine="true"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/text_size_small" />
@@ -53,7 +61,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
 
                     <ImageView
@@ -67,6 +76,7 @@
                         android:text="@{viewModel.likeCount}"
                         android:singleLine="true"
                         android:textColor="@color/colorWhite"
+                        android:layout_marginLeft="@dimen/dimen_4"
                         android:textSize="@dimen/text_size_small" />
 
 

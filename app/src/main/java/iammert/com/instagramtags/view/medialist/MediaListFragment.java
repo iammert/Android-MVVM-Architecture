@@ -1,5 +1,6 @@
 package iammert.com.instagramtags.view.medialist;
 
+import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -29,6 +30,7 @@ import iammert.com.instagramtags.viewmodel.medialist.MediaListViewModel;
 public class MediaListFragment extends Fragment implements MediaListViewModel.MediaListListener {
 
     public static final String KEY_TAG = "key_tag";
+    public static final String KEY_STATE_LIST = "key_state_list";
 
     FragmentMediaListBinding binding;
 
@@ -53,11 +55,25 @@ public class MediaListFragment extends Fragment implements MediaListViewModel.Me
         initializeInjectors();
         initializeViews();
         binding.setViewModel(viewModel);
+
+        if (savedInstanceState == null)
+            viewModel.loadMedias();
+        else
+            adapter.setMedias(Parcels.unwrap(savedInstanceState.getParcelable(KEY_STATE_LIST)));
+
         return binding.getRoot();
     }
 
     private void initializeViews() {
-        binding.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        int displayMode = getResources().getConfiguration().orientation;
+
+        GridLayoutManager gridLayoutManager;
+        if (displayMode == Configuration.ORIENTATION_PORTRAIT)
+            gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        else
+            gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+
+        binding.recyclerView.setLayoutManager(gridLayoutManager);
         binding.recyclerView.setAdapter(adapter);
     }
 
@@ -73,6 +89,13 @@ public class MediaListFragment extends Fragment implements MediaListViewModel.Me
     public void onDestroy() {
         super.onDestroy();
         viewModel.stop();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (adapter.getMedias() != null)
+            outState.putParcelable(KEY_STATE_LIST, Parcels.wrap(adapter.getMedias()));
     }
 
     @Override

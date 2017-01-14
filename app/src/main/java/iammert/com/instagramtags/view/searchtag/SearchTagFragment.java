@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.parceler.Parcels;
+
 import javax.inject.Inject;
 
 import iammert.com.instagramtags.InstagramTagsApp;
@@ -22,7 +24,9 @@ import iammert.com.instagramtags.viewmodel.searchtag.SearchTagViewModel;
  * Created by mertsimsek on 13/01/17.
  */
 
-public class SearchTagFragment extends Fragment implements SearchTagViewModel.SearchTagListener{
+public class SearchTagFragment extends Fragment implements SearchTagViewModel.SearchTagListener {
+
+    public static final String KEY_STATE_LIST = "key_state_list";
 
     FragmentSearchTagBinding binding;
 
@@ -46,14 +50,25 @@ public class SearchTagFragment extends Fragment implements SearchTagViewModel.Se
         initializeInjectors();
         binding.setViewModel(viewModel);
         binding.recyclerView.setAdapter(adapter);
+
+        if (savedInstanceState != null)
+            adapter.setTags(Parcels.unwrap(savedInstanceState.getParcelable(KEY_STATE_LIST)));
+
         return binding.getRoot();
     }
 
-    private void initializeInjectors(){
+    private void initializeInjectors() {
         DaggerSearchTagComponent.builder()
-                .appComponent(((InstagramTagsApp)getActivity().getApplication()).getAppComponent())
+                .appComponent(((InstagramTagsApp) getActivity().getApplication()).getAppComponent())
                 .searchTagModule(new SearchTagModule(this))
                 .build().inject(this);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (adapter != null && adapter.getTags() != null)
+            outState.putParcelable(KEY_STATE_LIST, Parcels.wrap(adapter.getTags()));
     }
 
     @Override

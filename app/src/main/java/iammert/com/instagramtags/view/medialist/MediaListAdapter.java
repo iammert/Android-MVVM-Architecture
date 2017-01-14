@@ -18,7 +18,7 @@ import iammert.com.instagramtags.viewmodel.medialist.MediaListItemViewModel;
 
 public class MediaListAdapter extends RecyclerView.Adapter<MediaListAdapter.MediaListViewHolder>{
 
-    List<Media> medias;
+    private List<Media> medias;
 
     public MediaListAdapter() {
         medias = new ArrayList<>();
@@ -27,6 +27,10 @@ public class MediaListAdapter extends RecyclerView.Adapter<MediaListAdapter.Medi
     public void setMedias(List<Media> medias){
         this.medias = medias;
         notifyDataSetChanged();
+    }
+
+    public List<Media> getMedias(){
+        return medias;
     }
 
     @Override

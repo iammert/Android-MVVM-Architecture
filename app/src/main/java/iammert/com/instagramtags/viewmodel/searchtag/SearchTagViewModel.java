@@ -30,8 +30,8 @@ public class SearchTagViewModel {
 
         isLoading = new ObservableField<>(false);
         refreshEnabled = new ObservableField<>(false);
-
         publishSubject = PublishSubject.create();
+
         publishSubject.debounce(200, TimeUnit.MILLISECONDS)
                 .doOnNext(response -> refreshEnabled.set(true))
                 .doOnNext(response -> isLoading.set(true))

@@ -12,6 +12,6 @@ public class ImageWrapper {
     @SerializedName("low_resolution")
     public Image lowResolution;
     public Image thumbnail;
-    @SerializedName("standart_resolution")
+    @SerializedName("standard_resolution")
     public Image standartResolution;
 }

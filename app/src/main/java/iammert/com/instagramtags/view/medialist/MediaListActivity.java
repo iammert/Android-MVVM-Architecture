@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import org.parceler.Parcels;
 
@@ -31,9 +32,14 @@ public class MediaListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_media_list);
 
+        Tag tag = Parcels.unwrap(getIntent().getExtras().getParcelable(KEY_TAG));
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("#" + tag.name);
+
         if (savedInstanceState == null)
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.containerDetail, MediaListFragment.newInstance(Parcels.unwrap(getIntent().getExtras().getParcelable(KEY_TAG))))
+                    .add(R.id.containerDetail, MediaListFragment.newInstance(tag))
                     .commitAllowingStateLoss();
     }
 }

@@ -32,6 +32,10 @@ public class SearchTagAdapter extends RecyclerView.Adapter<SearchTagAdapter.Sear
         notifyDataSetChanged();
     }
 
+    public List<Tag> getTags(){
+        return tags;
+    }
+
     @Override
     public SearchTagViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return SearchTagViewHolder.create(LayoutInflater.from(parent.getContext()), parent);

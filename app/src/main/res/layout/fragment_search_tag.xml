@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:focusableInTouchMode="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -50,7 +51,6 @@
                 app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
         </android.support.v4.widget.SwipeRefreshLayout>
-
 
     </LinearLayout>
 </layout>

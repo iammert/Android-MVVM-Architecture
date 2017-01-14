@@ -15,6 +15,7 @@ import rx.subscriptions.CompositeSubscription;
 
 public class MediaListViewModel {
 
+    public ObservableField<String> tagName;
     public ObservableField<Boolean> isLoading;
     public ObservableField<Boolean> refreshEnabled;
 
@@ -32,7 +33,10 @@ public class MediaListViewModel {
 
         isLoading = new ObservableField<>(true);
         refreshEnabled = new ObservableField<>(true);
+        tagName = new ObservableField<>("#" + tag.name);
+    }
 
+    public void loadMedias(){
         subscription.add(mediaListUsecase.searchMedia(tag.name)
                 .doOnNext(response -> isLoading.set(false))
                 .doOnNext(response -> refreshEnabled.set(false))

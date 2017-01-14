@@ -10,6 +10,6 @@
     <color name="colorGrayLight">#9e9e9e</color>
 
     <color name="colorBlack">#000000</color>
-    <color name="colorBlackAlpha">#a8000000</color>
-    <color name="colorBlackAlpha2x">#46000000</color>
+    <color name="colorBlackAlpha">#bf000000</color>
+    <color name="colorBlackAlpha2x">#5a000000</color>
 </resources>

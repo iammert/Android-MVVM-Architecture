@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -15,6 +16,7 @@ import iammert.com.instagramtags.di.main.DaggerMainComponent;
 import iammert.com.instagramtags.di.main.MainModule;
 import iammert.com.instagramtags.model.api.entity.Tag;
 import iammert.com.instagramtags.view.medialist.MediaListActivity;
+import iammert.com.instagramtags.view.medialist.MediaListFragment;
 import iammert.com.instagramtags.view.searchtag.SearchTagFragment;
 import iammert.com.instagramtags.viewmodel.main.MainViewModel;
 
@@ -59,11 +61,20 @@ public class MainActivity extends AppCompatActivity implements MainViewModel.Mai
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        viewModel.stop();
+    }
+
+    @Override
     public void onTagItemClicked(Tag tag) {
-        if(!viewModel.isTwoPane())
+        if (!viewModel.isTwoPane())
             startActivity(MediaListActivity.newIntent(this, tag));
-        else{
-            // TODO: 14/01/17 load fragment to containerDetail
+        else {
+            if (!isFinishing())
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.containerDetail, MediaListFragment.newInstance(tag))
+                        .commitAllowingStateLoss();
         }
     }
 }
