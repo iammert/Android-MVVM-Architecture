@@ -72,7 +72,6 @@ ext {
     supportLibAppCompat = "com.android.support:appcompat-v7:$supportLibVersion"
     supportLibDesign = "com.android.support:design:$supportLibVersion"
     supportLibCardView = "com.android.support:cardview-v7:$supportLibVersion"
-    butterKnife = "com.jakewharton:butterknife:$butterknifeVersion"
     dagger = "com.google.dagger:dagger:$daggerVersion"
     daggerCompiler = "com.google.dagger:dagger-compiler:$daggerCompilerVersion"
     daggerGlassfish = "org.glassfish:javax.annotation:$daggerGlassfishVersion"

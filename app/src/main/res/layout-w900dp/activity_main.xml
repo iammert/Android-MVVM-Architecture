@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="viewModel"
             type="iammert.com.instagramtags.viewmodel.main.MainViewModel" />
@@ -49,6 +48,5 @@
         </LinearLayout>
 
     </RelativeLayout>
-
 
 </layout>

@@ -74,9 +74,6 @@ dependencies {
     compile rootProject.ext.rxjava
     compile rootProject.ext.retrofitRxAdapter
 
-    //Butterknife
-    compile rootProject.ext.butterKnife
-
     //rxAndroid & rxBinding
     compile rootProject.ext.rxAndroid
     compile rootProject.ext.rxBinding
