@@ -11,4 +11,8 @@
 
     <string name="dialog_loading_title">Loading</string>
     <string name="dialog_loading_content">Please wait.Loading.</string>
+
+    <string name="dialog_error_title">Error</string>
+    <string name="dialog_error_content">Error loading content.</string>
+    <string name="dialog_action_ok">OK</string>
 </resources>

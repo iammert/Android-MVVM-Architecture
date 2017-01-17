@@ -21,6 +21,7 @@ import iammert.com.instagramtags.di.medialist.DaggerMediaListComponent;
 import iammert.com.instagramtags.di.medialist.MediaListModule;
 import iammert.com.instagramtags.model.api.entity.MediaListResponse;
 import iammert.com.instagramtags.model.api.entity.Tag;
+import iammert.com.instagramtags.util.DialogBuilder;
 import iammert.com.instagramtags.viewmodel.medialist.MediaListViewModel;
 
 /**
@@ -101,5 +102,14 @@ public class MediaListFragment extends Fragment implements MediaListViewModel.Me
     @Override
     public void onMediaListLoaded(MediaListResponse response) {
         adapter.setMedias(response.data);
+    }
+
+    @Override
+    public void onError(Throwable error) {
+        DialogBuilder
+                .infoDialog(getActivity(),
+                        R.string.dialog_error_title,
+                        R.string.dialog_error_content)
+                .show();
     }
 }

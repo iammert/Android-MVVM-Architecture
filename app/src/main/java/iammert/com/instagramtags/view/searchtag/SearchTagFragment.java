@@ -18,6 +18,7 @@ import iammert.com.instagramtags.databinding.FragmentSearchTagBinding;
 import iammert.com.instagramtags.di.searchtag.DaggerSearchTagComponent;
 import iammert.com.instagramtags.di.searchtag.SearchTagModule;
 import iammert.com.instagramtags.model.api.entity.TagSearchResponse;
+import iammert.com.instagramtags.util.DialogBuilder;
 import iammert.com.instagramtags.viewmodel.searchtag.SearchTagViewModel;
 
 /**
@@ -74,5 +75,14 @@ public class SearchTagFragment extends Fragment implements SearchTagViewModel.Se
     @Override
     public void onTagListLoaded(TagSearchResponse response) {
         adapter.setTags(response.data);
+    }
+
+    @Override
+    public void onError(Throwable error) {
+        DialogBuilder
+                .infoDialog(getActivity(),
+                        R.string.dialog_error_title,
+                        R.string.dialog_error_content)
+                .show();
     }
 }

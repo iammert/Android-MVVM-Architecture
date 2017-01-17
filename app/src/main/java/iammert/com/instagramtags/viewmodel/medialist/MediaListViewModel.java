@@ -40,7 +40,7 @@ public class MediaListViewModel {
         subscription.add(mediaListUsecase.searchMedia(tag.name)
                 .doOnNext(response -> isLoading.set(false))
                 .doOnNext(response -> refreshEnabled.set(false))
-                .subscribe(listener::onMediaListLoaded));
+                .subscribe(listener::onMediaListLoaded, listener::onError));
     }
 
     public void stop() {
@@ -50,5 +50,7 @@ public class MediaListViewModel {
 
     public interface MediaListListener {
         void onMediaListLoaded(MediaListResponse response);
+
+        void onError(Throwable error);
     }
 }

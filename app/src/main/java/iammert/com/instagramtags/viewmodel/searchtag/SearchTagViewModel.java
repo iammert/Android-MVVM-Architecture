@@ -38,7 +38,7 @@ public class SearchTagViewModel {
                 .flatMap(usecase::searchTag)
                 .doOnNext(response -> isLoading.set(false))
                 .doOnNext(response -> refreshEnabled.set(false))
-                .subscribe(listener::onTagListLoaded);
+                .subscribe(listener::onTagListLoaded, listener::onError);
     }
 
     public TextWatcher getTextWatcher() {
@@ -53,5 +53,7 @@ public class SearchTagViewModel {
 
     public interface SearchTagListener{
         void onTagListLoaded(TagSearchResponse response);
+
+        void onError(Throwable error);
     }
 }
