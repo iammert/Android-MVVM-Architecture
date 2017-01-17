@@ -14,8 +14,8 @@ public class Constants {
     /**
      * Client info, scope info, response type
      */
-    public static final String CLIENT_ID = "3867babf1c0c41bb858a8eb03c31c60f";
-    public static final String REDIRECT_URI = "https://masterdetailtest.com";
+    public static final String CLIENT_ID = "";
+    public static final String REDIRECT_URI = "";
     public static final String RESPONSE_TYPE = "token";
     public static final String SCOPE = "public_content";
 
