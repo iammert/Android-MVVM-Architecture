@@ -1,13 +1,17 @@
 package iammert.com.instagramtags.viewmodel.searchtag;
 
+import android.content.Context;
+import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
+import android.databinding.ObservableList;
 import android.text.TextWatcher;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import iammert.com.instagramtags.domain.searchtag.SearchTagUsecase;
-import iammert.com.instagramtags.model.api.entity.TagSearchResponse;
+import iammert.com.instagramtags.model.api.entity.Tag;
+import iammert.com.instagramtags.util.RxBus;
 import iammert.com.instagramtags.util.SimpleTextWatcher;
 import rx.Observable;
 import rx.subjects.PublishSubject;
@@ -25,10 +29,14 @@ public class SearchTagViewModel {
     private PublishSubject<String> publishSubject;
     private SearchTagUsecase usecase;
     private SearchTagListener listener;
+    private Context context;
+    private RxBus rxBus;
 
     public SearchTagViewModel(Context context, RxBus rxBus, SearchTagUsecase usecase, SearchTagListener listener) {
         this.usecase = usecase;
         this.listener = listener;
+        this.context = context;
+        this.rxBus = rxBus;
 
         isLoading = new ObservableField<>(false);
         refreshEnabled = new ObservableField<>(false);
@@ -44,13 +52,20 @@ public class SearchTagViewModel {
                 .map(tagSearchResponse -> tagSearchResponse.data)
                 .flatMap(Observable::from)
                 .map(tag -> new SearchTagItemViewModel(context, rxBus, tag))
-                .toList()
-                .subscribe(tagObservableList::addAll, listener::onError);
+                .subscribe(tagObservableList::add, listener::onError);
     }
 
-    public void setTagList(List<SearchTagItemViewModel> tagViewModels){
+    public void setTagList(List<Tag> tags){
         tagObservableList.clear();
-        tagObservableList.addAll(tagViewModels);
+        Observable.from(tags)
+                .map(tag -> new SearchTagItemViewModel(context, rxBus, tag))
+                .subscribe(tagObservableList::add);
+    }
+
+    public Observable<List<Tag>> getTagList(){
+        return Observable.from(tagObservableList)
+                .map(SearchTagItemViewModel::getTag)
+                .toList();
     }
 
     public TextWatcher getTextWatcher() {

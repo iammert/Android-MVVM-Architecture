@@ -23,6 +23,7 @@ import iammert.com.instagramtags.di.searchtag.SearchTagModule;
 import iammert.com.instagramtags.model.api.entity.Tag;
 import iammert.com.instagramtags.model.api.entity.TagSearchResponse;
 import iammert.com.instagramtags.util.DialogBuilder;
+import iammert.com.instagramtags.viewmodel.searchtag.SearchTagItemViewModel;
 import iammert.com.instagramtags.viewmodel.searchtag.SearchTagViewModel;
 
 /**
@@ -56,7 +57,7 @@ public class SearchTagFragment extends Fragment implements SearchTagViewModel.Se
         binding.setViewModel(viewModel);
 
         LastAdapter.with(viewModel.tagObservableList, BR.viewModel)
-                .map(Tag.class, R.layout.item_search_tag)
+                .map(SearchTagItemViewModel.class, R.layout.item_search_tag)
                 .into(binding.recyclerView);
 
         if (savedInstanceState != null)
@@ -75,8 +76,9 @@ public class SearchTagFragment extends Fragment implements SearchTagViewModel.Se
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (viewModel != null && viewModel.tagObservableList != null)
-            outState.putParcelable(KEY_STATE_LIST, Parcels.wrap(viewModel.tagObservableList));
+        viewModel.getTagList()
+                .map(Parcels::wrap)
+                .subscribe(parcelable -> outState.putParcelable(KEY_STATE_LIST, parcelable));
     }
 
     @Override

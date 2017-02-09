@@ -4,6 +4,8 @@ import android.content.Context;
 import android.databinding.ObservableField;
 import android.view.View;
 
+import org.parceler.Parcel;
+
 import iammert.com.instagramtags.R;
 import iammert.com.instagramtags.model.api.entity.Tag;
 import iammert.com.instagramtags.util.RxBus;
@@ -11,7 +13,6 @@ import iammert.com.instagramtags.util.RxBus;
 /**
  * Created by mertsimsek on 13/01/17.
  */
-
 public class SearchTagItemViewModel {
 
     public ObservableField<String> tagName;
@@ -26,6 +27,10 @@ public class SearchTagItemViewModel {
 
         tagName = new ObservableField<>(context.getString(R.string.tag, tag.name));
         postCount = new ObservableField<>(context.getString(R.string.post_count, String.valueOf(tag.mediaCount)));
+    }
+
+    public Tag getTag(){
+        return tag;
     }
 
     public void onTagClicked(View view) {
