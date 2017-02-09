@@ -46,6 +46,7 @@ public class SearchTagViewModel {
         publishSubject.debounce(200, TimeUnit.MILLISECONDS)
                 .doOnNext(response -> refreshEnabled.set(true))
                 .doOnNext(response -> isLoading.set(true))
+                .doOnNext(s -> tagObservableList.clear())
                 .flatMap(usecase::searchTag)
                 .doOnNext(response -> isLoading.set(false))
                 .doOnNext(response -> refreshEnabled.set(false))
