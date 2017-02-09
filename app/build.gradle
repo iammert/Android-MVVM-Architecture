@@ -50,6 +50,10 @@ android {
         exclude 'META-INF/NOTICE.txt'
         exclude 'META-INF/LICENSE'
     }
+
+    dexOptions {
+        preDexLibraries = false
+    }
 }
 
 dependencies {
@@ -87,6 +91,7 @@ dependencies {
     compile rootProject.ext.picasso
     compile rootProject.ext.materialDialog
     compile rootProject.ext.circleImage
+    compile rootProject.ext.lastAdapter
 
     //Parceler
     compile rootProject.ext.parcelerApi

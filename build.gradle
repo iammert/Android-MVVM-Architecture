@@ -38,16 +38,16 @@ ext {
     /**
      * SDK versions
      */
-    buildToolsVersion = '24.0.0'
-    compileSdkVersion = 23
-    targetSdkVersion = 22
+    buildToolsVersion = '25.0.0'
+    compileSdkVersion = 25
+    targetSdkVersion = 25
     minSdkVersion = 16
     devMinSdkVersion = 21
 
     /**
      * Dependency Versions
      */
-    supportLibVersion = '23.2.1'
+    supportLibVersion = '25.0.0'
     butterknifeVersion = '7.0.1'
     rxjavaVersion = '1.0.10'
     rxAndroidVersion = '1.0.1'
@@ -64,6 +64,7 @@ ext {
     parcelerVersion = '1.0.4'
     materialDialogVersion = '0.9.0.0'
     circleImageViewVersion = '2.1.0'
+    lastAdapterVersion = '2.0.0'
 
 
     /**
@@ -88,4 +89,5 @@ ext {
     parceler = "org.parceler:parceler:$parcelerVersion"
     materialDialog = "com.afollestad.material-dialogs:core:$materialDialogVersion"
     circleImage = "de.hdodenhof:circleimageview:$circleImageViewVersion"
+    lastAdapter = "com.github.nitrico.lastadapter:lastadapter:$lastAdapterVersion"
 }

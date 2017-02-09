@@ -1,5 +1,6 @@
 package iammert.com.instagramtags.di.searchtag;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
@@ -23,9 +24,11 @@ import iammert.com.instagramtags.viewmodel.searchtag.SearchTagViewModel;
 public class SearchTagModule {
 
     SearchTagViewModel.SearchTagListener listener;
+    Context context;
 
-    public SearchTagModule(SearchTagViewModel.SearchTagListener listener) {
+    public SearchTagModule(Context context, SearchTagViewModel.SearchTagListener listener) {
         this.listener = listener;
+        this.context = context;
     }
 
     @Provides
@@ -42,8 +45,8 @@ public class SearchTagModule {
 
     @Provides
     @Fragment
-    SearchTagViewModel provideSearchTagViewModel(SearchTagUsecase usecase){
-        return new SearchTagViewModel(usecase, listener);
+    SearchTagViewModel provideSearchTagViewModel(RxBus rxBus, SearchTagUsecase usecase){
+        return new SearchTagViewModel(context, rxBus, usecase, listener);
     }
 
     @Provides
